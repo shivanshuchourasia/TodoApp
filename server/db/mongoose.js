@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var aws = require('aws-sdk');
 
 mongoose.Promise = global.Promise;
 
