@@ -1,16 +1,21 @@
 var mongoose = require('mongoose');
-// var aws = require('aws-sdk');
 
 mongoose.Promise = global.Promise;
 
 require('dotenv').config();
 
-const mlabDB = `mongodb+srv://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@todo-app-qhj7g.mongodb.net/test?retryWrites=true&w=majority`;
+if(!process.env.MLABDB){
+  var db = 'mongodb://localhost:27017/TodoApp';
+}
+else{
+  var db = process.env.MLABDB.toHexString();
+}
 
-mongoose.connect(mlabDB || 'mongodb://localhost:27017/TodoApp', {useNewUrlParser: true})
-  .catch((e) => {
-    console.log('error');
-  });
+mongoose.connect(db, {useNewUrlParser: true}).then((res) => {
+  console.log(res);
+}).catch((e) => {
+    console.log(e);
+});
 
 module.exports = {mongoose};
 
