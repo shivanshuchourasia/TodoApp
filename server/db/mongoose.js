@@ -11,12 +11,9 @@ else{
   var db = process.env.MLABDB;
 }
 
-mongoose.connect(db, {useNewUrlParser: true}).then((res) => {
-  console.log(res);
-}).catch((e) => {
-    console.log(e);
+mongoose.connect(db, {useNewUrlParser: true}).catch((e) => {
+  console.log(e);
 });
 
 module.exports = {mongoose};
 
-//'mongodb://localhost:27017/TodoApp'
