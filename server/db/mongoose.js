@@ -11,7 +11,7 @@ else{
   var db = process.env.MLABDB;
 }
 
-mongoose.connect(db, {useNewUrlParser: true}).catch((e) => {
+mongoose.connect(db, {useNewUrlParser: true, useFindAndModify: false}).catch((e) => {
   console.log(e);
 });
 
