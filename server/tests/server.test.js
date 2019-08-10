@@ -1,28 +1,14 @@
 const request = require('supertest');
+const defaults = require('superagent-defaults');
 const expect = require('expect');
 const {ObjectID} = require('mongodb');
 
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
+const {todos, populateTodos, users, populateUsers} = require('./seed/seed');
 
-const todos = [{
-  _id: new ObjectID(),
-  text: 'First todo'
-},
-{
-  _id: new ObjectID(),
-  text: 'Second todo',
-  completed: true,
-  completedAt: 333
-}]
-
-beforeEach((done) => {
-  Todo.deleteMany({}).then(() => {
-    return Todo.insertMany(todos);
-  }).then(() => done());
-    
-})
-
+beforeEach(populateTodos);
+beforeEach(populateUsers);
 
 describe('POST /todos', () => {
   it('should create a new todos', (done) => {
@@ -184,3 +170,18 @@ describe('PATCH /todos/:id', () => {
       .end(done);
   })
 })
+
+// describe('GET /users/me', () => {
+//   it('should return user if authenticated', (done) =>{
+//     var requests = defaults(request(app));
+//     requests
+//       .get('/users/me')
+//       .set({"x-auth": users[0].tokens[0].token})
+//       .expect(200)
+//       .expect((res) => {
+//         expect(res.body._id).toBe(users[0]._id);
+//         expect(res.body.email).toBe(users[0].email);
+//       })
+//       .end(done);
+//   })
+// })
