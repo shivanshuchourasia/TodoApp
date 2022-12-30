@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "expect": "^24.8.0",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nodemon": "^1.18.9",
     "superagent-defaults": "^0.1.14",
     "supertest": "^3.4.2"
